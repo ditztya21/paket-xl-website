@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warung Paket XL - Ditztya</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #0059ff;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      padding: 1rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    .paket {
+      background: #fff;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .paket h3 {
+      margin: 0;
+    }
+    .paket button {
+      background: #0059ff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .paket button:hover {
+      background: #003ecc;
+    }
+    .pembayaran {
+      background: #e0e0e0;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    .qris-img {
+      width: 200px;
+      margin-top: 1rem;
+    }
+    .form-nomor {
+      margin-top: 1rem;
+    }
+    .form-nomor input {
+      padding: 0.5rem;
+      margin-right: 1rem;
+      width: 200px;
+    }
+    .api-info {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Warung Paket XL - Ditztya</h1>
+    <p>Pembayaran via DANA / QRIS: 082338559968 a.n. Jovian Raditya</p>
+  </header>
+  <main>
+    <div class="paket">
+      <h3>Paket 10GB - Rp 25.000</h3>
+      <p>Masa aktif 7 hari</p>
+      <button onclick="beli('Paket 10GB', 25000)">Beli</button>
+    </div><div class="paket">
+  <h3>Paket 20GB - Rp 45.000</h3>
+  <p>Masa aktif 15 hari</p>
+  <button onclick="beli('Paket 20GB', 45000)">Beli</button>
+</div>
+
+<div class="paket">
+  <h3>Paket 50GB - Rp 90.000</h3>
+  <p>Masa aktif 30 hari</p>
+  <button onclick="beli('Paket 50GB', 90000)">Beli</button>
+</div>
+
+<div class="paket">
+  <h3>Paket Unlimited 30 Hari - Rp 120.000</h3>
+  <p>FUP 1.5GB per hari</p>
+  <button onclick="beli('Paket Unlimited 30 Hari', 120000)">Beli</button>
+</div>
+
+<div class="paket">
+  <h3>Paket Malam 15GB - Rp 20.000</h3>
+  <p>Berlaku pukul 01.00 - 06.00</p>
+  <button onclick="beli('Paket Malam 15GB', 20000)">Beli</button>
+</div>
+
+<div id="pembayaran" class="pembayaran" style="display:none">
+  <h3>Langkah Pembayaran:</h3>
+  <ol>
+    <li>Transfer via DANA ke: <strong>082338559968</strong> a.n. <strong>Jovian Raditya</strong></li>
+    <li>Atau scan QRIS di bawah ini:</li>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAIAAACu/H08AAAAA3NCSVQICAjb4U/gAAACZklEQVR4nO3QsQ2DMBQEwTj2/5Q8p7+Ji6SdoRgfWquhB/cpr68/N53AQAAAAAAAAAAAAAAAAD8N9W6X7zv+cU16v3zXn1n03rf33Uzd+/1PR8ubvR/ue+n+d1/v+rI+2X78yN94fpyMXv5+GPW8nZ35+jv6vL1+Xz/71e4/z7D9X9d5f9Z6fzN+/V7w77+ty9z3eU8/0R9f7z/l9Tt/O8z3V+a+9q+G+rrfpd9U/y/Nv7m3tvdJ7n9Hz9/l/G/NfW5T1v+/6/vXw/qnPfrff1/v9vsd++u3zXv3+e4/S/HX7e7j99+V+95a69vX3sfw/jP7fp/H+52Pqv6+f7v35u1vzv+MzrHz7vf5nz7A5/z9L/HzM+c+ff+Xn39mX8XLt+fmve+4+rX/fUXeqfD+4z//oP7v+ef83/rmf7t5v+tnjzF/YGXL8o3wGZ6ngEKzpvJcAAAAASUVORK5CYII=" alt="QRIS GoPay Jovian" class="qris-img">
+    <li>Kirim bukti pembayaran ke WhatsApp: <strong>082338559968</strong></li>
+    <li>Ketik paket yang dibeli: <span id="paketDipilih"></span></li>
+    <li>Masukkan nomor XL tujuan:</li>
+  </ol>
+  <div class="form-nomor">
+    <input type="text" id="nomorXL" placeholder="08xxxxxxxxxx">
+    <button onclick="kirimWA()">Kirim ke WhatsApp</button>
+  </div>
+  <div class="api-info">
+    <p><strong>Catatan:</strong> Setelah admin menerima bukti pembayaran dan nomor XL, paket akan segera diproses melalui sistem otomatis API pengisian. Estimasi selesai 1-5 menit.</p>
+  </div>
+</div>
+
+  </main>  <script>
+    let paketDipilih = '';
+
+    function beli(paket, harga) {
+      paketDipilih = paket + ' - Rp ' + harga.toLocaleString();
+      document.getElementById('paketDipilih').innerText = paketDipilih;
+      document.getElementById('pembayaran').style.display = 'block';
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function kirimWA() {
+      const nomor = document.getElementById('nomorXL').value.trim();
+      if (!nomor.match(/^08\d{8,12}$/)) {
+        alert('Masukkan nomor XL yang valid!');
+        return;
+      }
+      const pesan = `Halo, saya sudah transfer.\n\nPaket: ${paketDipilih}\nNomor XL: ${nomor}`;
+      const url = `https://wa.me/6282338559968?text=${encodeURIComponent(pesan)}`;
+      window.open(url, '_blank');
+    }
+  </script></body>
+</html>
